@@ -1,0 +1,37 @@
+for (let i = 0; i <= 9; i++) {
+    const botao = document.getElementById(`btn${i}`);
+    botao.value = i;
+    tela = botao.addEventListener('click', () => {
+        click.push(i);
+        // inputNumero.innerHTML = `${i}`;
+        inputNumero.innerHTML = `${Number(click.join(''))}`;
+    });
+    botoes[`btn${i}`] = botao;
+    
+};
+
+btnMais.addEventListener('click', () => {
+    contador++;
+    operacao.push('+');
+    clickAnterior.push([...click]); // guarda os dígitos já digitados
+    // click = [];
+
+    tela2 = inputNumero.innerHTML = `${Number(clickAnterior[0].join(''))} ${operacao[0]}`;
+    
+    if (contador > 1) {
+        clickPosterior.push([...click]);
+
+        tela2 = inputNumero.innerHTML = 
+            `${Number(clickAnterior[0].join(''))} ${operacao[0]} ${Number(clickPosterior[0].join(''))}`;
+        
+        contador = 0;
+    }
+});
+
+console.log(click);
+const clickTotal = click.flat().reduce((acc, curr) => acc + curr, 0);
+console.log(clickTotal);
+
+btnIgual.addEventListener('click', () => {
+    tela2 = inputNumero.innerHTML = `${Number(clickAnterior[0].join(''))} ${operacao[0]} ${Number(clickPosterior[0].join(''))} = ${clickTotal}`;
+});

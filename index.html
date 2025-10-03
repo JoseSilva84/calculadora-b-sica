@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Calculadora</title>
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center vh-100">
+    <div class="calculadora bg-black p-4 rounded shadow" style="width: 380px; height: 350px;">
+        <h1 class="titulo text-center mb-4 text-white">Calculadora</h1>
+        <div class="bg-white mb-3" style="height: 30px;">
+            <p class="w-100 text-black" style="margin-left: 300px;" id="inputNumero"></p>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col"><button class="btn btn-secondary w-100" id="btn7">7</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn8">8</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn9">9</button></div>
+            <div class="col"><button class="btn btn-warning w-100" id="btnx">×</button></div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col"><button class="btn btn-secondary w-100" id="btn4">4</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn5">5</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn6">6</button></div>
+            <div class="col"><button class="btn btn-warning w-100" id="btn-">−</button></div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col"><button class="btn btn-secondary w-100" id="btn1">1</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn2">2</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn3">3</button></div>
+            <div class="col"><button class="btn btn-warning w-100" id="btn+">+</button></div>
+        </div>
+        <div class="row g-2">
+            <div class="col"><button class="btn btn-info w-100" id="btnZerar">C</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btn0">0</button></div>
+            <div class="col"><button class="btn btn-secondary w-100" id="btnvirgula">,</button></div>
+            <div class="col"><button class="btn btn-success w-100" id="btnigual">=</button></div>
+        </div>
+    </div>
+    <script src="calculadora.js"></script>
+</body>
+</html>

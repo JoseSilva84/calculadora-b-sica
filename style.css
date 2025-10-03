@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff1f1;
+    font-family: Arial, sans-serif;
+}
+
+.titulo {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.calculadoraCentral {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.entradanumero {
+    width: 300px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: black;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.inputNumero {
+    width: 200px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: black;
+    text-align: right;
+    border: none;
+}

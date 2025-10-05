@@ -125,10 +125,16 @@ btnIgual.addEventListener('click', () => {
         click = [];
         clickAnterior = [];
         clickPosterior = [];
-    }
-    console.log(resultado);
-
-    if (operacao === '-'){
+        console.log(resultado);
+    } else if (operacao === '-'){
+        resultado = clickAnterior - clickPosterior;
+        inputNumero.innerHTML = 
+            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
+        inputNumero.style.marginLeft = "240px";
+        click = [];
+        clickAnterior = [];
+        clickPosterior = [];
+    } else if (operacao === 'x'){
         resultado = clickAnterior - clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
@@ -138,13 +144,5 @@ btnIgual.addEventListener('click', () => {
         clickPosterior = [];
     }
 
-    if (operacao === 'x'){
-        resultado = clickAnterior - clickPosterior;
-        inputNumero.innerHTML = 
-            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "240px";
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-    }
+
 });

@@ -140,12 +140,13 @@ btnIgual.addEventListener('click', () => {
 
     inputNumero.innerHTML =
     `${clickAnterior} ${operacao} ${clickPosterior}`;
+    inputNumero.style.marginLeft = '300px';
 
     if (operacao === '+'){
         resultado = clickAnterior + clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "240px";
+        inputNumero.style.marginLeft = "230px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];
@@ -155,7 +156,7 @@ btnIgual.addEventListener('click', () => {
         resultado = clickAnterior - clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "240px";
+        inputNumero.style.marginLeft = "230px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];
@@ -164,7 +165,7 @@ btnIgual.addEventListener('click', () => {
         resultado = clickAnterior * clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "240px";
+        inputNumero.style.marginLeft = "230px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];

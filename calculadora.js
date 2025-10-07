@@ -20,7 +20,7 @@ const btnVirgula = document.getElementById('btnvirgula');
 const btnIgual = document.getElementById('btnigual');
 const btnZerar = document.getElementById('btnZerar');
 
-// const btnZero = btnZerar.value = "";
+const painel = document.getElementById('painel');
 
 
 let click = [];
@@ -80,25 +80,16 @@ for (let i = 0; i <= 9; i++) {
     const botao = document.getElementById(`btn${i}`);
     botao.value = i;
     tela = botao.addEventListener('click', () => {
-        // console.log(click);
-        // console.log(botao.value);
-        
-        // clickAnterior.push(Number(botao.value));
-        // console.log(clickAnterior);
         
         inputNumero.innerHTML = i;
         click.push(i);
-        
-        // const clickTotal = click.flat().reduce((acc, curr) => acc + curr, 0); //soma do array
-        // console.log(clickTotal);
 
+        // inputNumero.innerHTML = 
+        // `${i}`;
         
     });
-    // botoes[`btn${i}`] = botao;
     
 };
-
-// console.log(click);
 
 btnMais.addEventListener('click', () => {
     clickAnterior = Number(click.join(''));
@@ -109,6 +100,7 @@ btnMais.addEventListener('click', () => {
         `${clickAnterior} ${operacao}`;
     inputNumero.style.marginLeft = '300px';
     btnZerar;
+    painel.innerHTML = `${clickAnterior} ${operacao}`;
 });
 
 btnMenos.addEventListener('click', () => {
@@ -122,31 +114,50 @@ btnMenos.addEventListener('click', () => {
     btnZerar;
 });
 
+let clique = 0;
+
 btnX.addEventListener('click', () => {
-    clickAnterior = Number(click.join(''));
-    console.log(clickAnterior);
-    operacao = '*';
-    click = [];
-    inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-    inputNumero.style.marginLeft = '300px';
-    btnZerar;
+    clique++;
+    if (clique === 1) {
+        clickAnterior = Number(click.join(''));
+        console.log(clickAnterior);
+        operacao = '*';
+        click = [];
+        inputNumero.innerHTML =
+            `${clickAnterior} ${operacao}`;
+        inputNumero.style.marginLeft = '300px';
+        btnZerar;
+    } else if (clique === 2) {
+        clickAnterior = Number(click.join(''));
+        console.log(clickAnterior);
+        operacao = '/';
+        click = [];
+        inputNumero.innerHTML =
+            `${clickAnterior} ${operacao}`;
+        inputNumero.style.marginLeft = '300px';
+        btnZerar;
+    }
+
 });
 
 btnIgual.addEventListener('click', () => {
     clickPosterior = Number(click.join(''));
-    console.log(clickPosterior)
+    // console.log(clickPosterior)
     let resultado = 0;
-
+    
     inputNumero.innerHTML =
     `${clickAnterior} ${operacao} ${clickPosterior}`;
     inputNumero.style.marginLeft = '300px';
-
+    painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
+    
     if (operacao === '+'){
         resultado = clickAnterior + clickPosterior;
         inputNumero.innerHTML = 
-            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
+        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
+
+        painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}  = ${resultado}`;
+
         click = [];
         clickAnterior = [];
         clickPosterior = [];
@@ -163,6 +174,15 @@ btnIgual.addEventListener('click', () => {
         btnZerar;
     } else if (operacao === '*'){
         resultado = clickAnterior * clickPosterior;
+        inputNumero.innerHTML = 
+            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
+        inputNumero.style.marginLeft = "230px";
+        click = [];
+        clickAnterior = [];
+        clickPosterior = [];
+        btnZerar;
+    } else if (operacao === '/') {
+        resultado = clickAnterior / clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";

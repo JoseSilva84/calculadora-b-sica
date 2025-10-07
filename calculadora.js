@@ -107,6 +107,30 @@ btnMais.addEventListener('click', () => {
     click = [];
     inputNumero.innerHTML =
         `${clickAnterior} ${operacao}`;
+    inputNumero.style.marginLeft = '300px';
+    btnZerar;
+});
+
+btnMenos.addEventListener('click', () => {
+    clickAnterior = Number(click.join(''));
+    console.log(clickAnterior);
+    operacao = '-';
+    click = [];
+    inputNumero.innerHTML =
+        `${clickAnterior} ${operacao}`;
+    inputNumero.style.marginLeft = '300px';
+    btnZerar;
+});
+
+btnX.addEventListener('click', () => {
+    clickAnterior = Number(click.join(''));
+    console.log(clickAnterior);
+    operacao = '*';
+    click = [];
+    inputNumero.innerHTML =
+        `${clickAnterior} ${operacao}`;
+    inputNumero.style.marginLeft = '300px';
+    btnZerar;
 });
 
 btnIgual.addEventListener('click', () => {
@@ -126,6 +150,7 @@ btnIgual.addEventListener('click', () => {
         clickAnterior = [];
         clickPosterior = [];
         console.log(resultado);
+        btnZerar;
     } else if (operacao === '-'){
         resultado = clickAnterior - clickPosterior;
         inputNumero.innerHTML = 
@@ -134,15 +159,16 @@ btnIgual.addEventListener('click', () => {
         click = [];
         clickAnterior = [];
         clickPosterior = [];
-    } else if (operacao === 'x'){
-        resultado = clickAnterior - clickPosterior;
+        btnZerar;
+    } else if (operacao === '*'){
+        resultado = clickAnterior * clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "240px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];
+        btnZerar;
     }
-
 
 });

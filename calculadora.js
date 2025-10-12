@@ -77,6 +77,8 @@ let tela;
 let tela2;
 
 for (let i = 0; i <= 9; i++) {
+    painel.innerHTML = '';
+
     const botao = document.getElementById(`btn${i}`);
     botao.value = i;
     tela = botao.addEventListener('click', () => {
@@ -121,23 +123,30 @@ btnX.addEventListener('click', () => {
     if (clique === 1) {
         clickAnterior = Number(click.join(''));
         console.log(clickAnterior);
+        
         operacao = '*';
         click = [];
         inputNumero.innerHTML =
-            `${clickAnterior} ${operacao}`;
+        `${clickAnterior} ${operacao}`;
         inputNumero.style.marginLeft = '300px';
         btnZerar;
+        
+        painel.innerHTML = `${clickAnterior} ${operacao}`;
+        
     } else if (clique === 2) {
         clickAnterior = Number(click.join(''));
         console.log(clickAnterior);
+        
         operacao = '/';
         click = [];
         inputNumero.innerHTML =
-            `${clickAnterior} ${operacao}`;
+        `${clickAnterior} ${operacao}`;
         inputNumero.style.marginLeft = '300px';
         btnZerar;
+        
+        painel.innerHTML = `${clickAnterior} ${operacao}`;
     }
-
+    
 });
 
 btnIgual.addEventListener('click', () => {
@@ -148,40 +157,51 @@ btnIgual.addEventListener('click', () => {
     inputNumero.innerHTML =
     `${clickAnterior} ${operacao} ${clickPosterior}`;
     inputNumero.style.marginLeft = '300px';
+
     painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
     
     if (operacao === '+'){
+        
         resultado = clickAnterior + clickPosterior;
         inputNumero.innerHTML = 
         `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
-
+        
         painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}  = ${resultado}`;
 
+        setInterval(()=>{
+            painel.innerHTML =''
+        }, 3000) //Função que apaga em 3 segundos o resultado do painel com os valores abaixo da calculadora
+        
         click = [];
         clickAnterior = [];
         clickPosterior = [];
         console.log(resultado);
         btnZerar;
+
     } else if (operacao === '-'){
+        
         resultado = clickAnterior - clickPosterior;
         inputNumero.innerHTML = 
-            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
+        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];
         btnZerar;
+        
     } else if (operacao === '*'){
+        
         resultado = clickAnterior * clickPosterior;
         inputNumero.innerHTML = 
-            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
+        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
         click = [];
         clickAnterior = [];
         clickPosterior = [];
         btnZerar;
     } else if (operacao === '/') {
+
         resultado = clickAnterior / clickPosterior;
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;

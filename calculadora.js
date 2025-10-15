@@ -28,6 +28,7 @@ let clickAnterior = null;
 let clickPosterior = null;
 let operacao = null;
 let total = [];
+let clickOperacao = 0;
 
 const btnZero = btnZerar.addEventListener('click', () => {
     inputNumero.textContent = "";
@@ -77,18 +78,27 @@ let tela;
 let tela2;
 
 for (let i = 0; i <= 9; i++) {
-    painel.innerHTML = '';
-
+    
+    if(botao === 1){
+        clickOperacao++;
+        painel.innerHTML = '';
+        inputNumero.innerHTML = '';
+    };
     const botao = document.getElementById(`btn${i}`);
     botao.value = i;
-    tela = botao.addEventListener('click', () => {
-        
+    tela = botao.addEventListener('click', (event) => {
+        event.preventDefault();
+
+
         inputNumero.innerHTML = i;
         click.push(i);
 
         // inputNumero.innerHTML = 
         // `${i}`;
-        
+        if(operacao){
+            clickOperacao++;
+            inputNumero.innerHTML = `${clickAnterior} ${operacao} ${event.target.value}`
+        };
     });
     
 };
@@ -102,7 +112,7 @@ btnMais.addEventListener('click', () => {
         `${clickAnterior} ${operacao}`;
     inputNumero.style.marginLeft = '300px';
     btnZerar;
-    painel.innerHTML = `${clickAnterior} ${operacao}`;
+    // painel.innerHTML = `${clickAnterior} ${operacao}`;
 });
 
 btnMenos.addEventListener('click', () => {
@@ -131,7 +141,7 @@ btnX.addEventListener('click', () => {
         inputNumero.style.marginLeft = '300px';
         btnZerar;
         
-        painel.innerHTML = `${clickAnterior} ${operacao}`;
+        // painel.innerHTML = `${clickAnterior} ${operacao}`;
         
     } else if (clique === 2) {
         clickAnterior = Number(click.join(''));
@@ -144,7 +154,7 @@ btnX.addEventListener('click', () => {
         inputNumero.style.marginLeft = '300px';
         btnZerar;
         
-        painel.innerHTML = `${clickAnterior} ${operacao}`;
+        // painel.innerHTML = `${clickAnterior} ${operacao}`;
     }
     
 });
@@ -158,7 +168,7 @@ btnIgual.addEventListener('click', () => {
     `${clickAnterior} ${operacao} ${clickPosterior}`;
     inputNumero.style.marginLeft = '300px';
 
-    painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
+    // painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
     
     if (operacao === '+'){
         
@@ -167,7 +177,7 @@ btnIgual.addEventListener('click', () => {
         `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
         
-        painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}  = ${resultado}`;
+        painel.innerHTML = `${resultado}`;
 
         setInterval(()=>{
             painel.innerHTML =''

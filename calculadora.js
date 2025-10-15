@@ -181,7 +181,8 @@ btnIgual.addEventListener('click', () => {
 
         setInterval(()=>{
             painel.innerHTML =''
-        }, 3000) //Função que apaga em 3 segundos o resultado do painel com os valores abaixo da calculadora
+        }, 3000) /* Função que apaga em 3 segundos o resultado do painel 
+        com os valores abaixo da calculadora */
         
         click = [];
         clickAnterior = [];

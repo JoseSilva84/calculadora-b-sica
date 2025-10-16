@@ -16,7 +16,7 @@ const btn3 = document.getElementById('btn3');
 const btnMais = document.getElementById('btn+');
 
 const btn0 = document.getElementById('btn0');
-const btnVirgula = document.getElementById('btnvirgula');
+const btnDivisao = document.getElementById('btndivisao');
 const btnIgual = document.getElementById('btnigual');
 const btnZerar = document.getElementById('btnZerar');
 
@@ -40,6 +40,7 @@ const btnZero = btnZerar.addEventListener('click', () => {
     operacao = '';
     total = [];
     clickOperacao = 0;
+    window.location.reload(true);
 });
 
 const btnMais2 = btnMais.addEventListener('click', () => {
@@ -54,8 +55,8 @@ const btnMultiplica = btnX.addEventListener('click', () => {
     inputNumero.textContent = click.concat(" x ").join("");
 });
 
-const btnVirgula2 = btnVirgula.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(",").join("");
+const btnDivisao2 = btnDivisao.addEventListener('click', () => {
+    inputNumero.textContent = click.concat(" / ").join("");
 });
 
 const btnIgual2 = btnIgual.addEventListener('click', () => {
@@ -76,7 +77,7 @@ const botoes = {
             btnMais: btnMais2, 
             btnMenos: btnMenos2, 
             btnX: btnMultiplica, 
-            btnVirgula: btnVirgula2, 
+            btnDivisao: btnDivisao2, 
             btnIgual: btnIgual2,
             btnZerar: btnZero
 };
@@ -122,7 +123,7 @@ btnMais.addEventListener('click', () => {
 
 btnMenos.addEventListener('click', () => {
     clickAnterior = Number(click.join(''));
-    console.log(clickAnterior);
+    // console.log(clickAnterior);
     operacao = '-';
     click = [];
     inputNumero.innerHTML =
@@ -134,39 +135,33 @@ btnMenos.addEventListener('click', () => {
 let clique = 0;
 
 btnX.addEventListener('click', () => {
-    clique++;
-    if (clique === 1) {
-        clickAnterior = Number(click.join(''));
-        console.log(clickAnterior);
-        
-        operacao = '*';
-        click = [];
-        inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-        inputNumero.style.marginLeft = '300px';
-        btnZerar;
-        
-        // painel.innerHTML = `${clickAnterior} ${operacao}`;
-        
-    } else if (clique === 2) {
-        clickAnterior = Number(click.join(''));
-        console.log(clickAnterior);
-        
-        operacao = '/';
-        click = [];
-        inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-        inputNumero.style.marginLeft = '300px';
-        btnZerar;
-        
-        // painel.innerHTML = `${clickAnterior} ${operacao}`;
-    }
+    clickAnterior = Number(click.join(''));
+    // console.log(clickAnterior);
     
+    operacao = '*';
+    click = [];
+    inputNumero.innerHTML =
+    `${clickAnterior} ${operacao}`;
+    inputNumero.style.marginLeft = '270px';
+    btnZerar;
+});
+
+btnDivisao.addEventListener('click', () => {
+    clickAnterior = Number(click.join(''));
+    // console.log(clickAnterior);
+    
+    operacao = '/';
+    click = [];
+    inputNumero.innerHTML =
+    `${clickAnterior} ${operacao}`;
+    inputNumero.style.marginLeft = '270px';
+    btnZerar;
 });
 
 let igualdade = btnIgual.addEventListener('click', () => {
     let teste = cliqueInicio++;
     console.log(`cliqueInicio: ${teste}`)
+    
     clickPosterior = Number(click.join(''));
     // console.log(clickPosterior)
     let resultado = 0;
@@ -174,8 +169,6 @@ let igualdade = btnIgual.addEventListener('click', () => {
     inputNumero.innerHTML =
     `${clickAnterior} ${operacao} ${clickPosterior}`;
     inputNumero.style.marginLeft = '300px';
-
-    // painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
     
     if (operacao === '+'){
         
@@ -185,18 +178,15 @@ let igualdade = btnIgual.addEventListener('click', () => {
         inputNumero.style.marginLeft = "230px";
         
         painel.innerHTML = `${resultado}`;
-
+        console.log(`No click: ${click}`);
+        console.log(`No clickAnterior: ${clickAnterior}`);
+        console.log(`No clickPosterior: ${clickPosterior}`);
+        
         setInterval(()=>{
             painel.innerHTML =''
         }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
         com os valores abaixo da calculadora */
         
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-        console.log(resultado);
-        btnZerar;
-
     } else if (operacao === '-'){
         
         resultado = clickAnterior - clickPosterior;
@@ -235,7 +225,7 @@ let igualdade = btnIgual.addEventListener('click', () => {
     } else if (operacao === '/') {
         operacao = '/';
         resultado = clickAnterior / clickPosterior;
-        console.log(resultado);
+        // console.log(resultado);
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
@@ -254,5 +244,5 @@ let igualdade = btnIgual.addEventListener('click', () => {
 });
 
 if(cliqueInicio === 2){
-    window.location.reload();
+    btnZerar;
 };

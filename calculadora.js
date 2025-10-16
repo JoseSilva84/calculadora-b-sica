@@ -82,6 +82,8 @@ const botoes = {
 };
 
 let tela;
+let numeroPosOperacao = [];
+let cliqueInicio = 1;
 
 for (let i = 0; i <= 9; i++) {
 
@@ -89,28 +91,31 @@ for (let i = 0; i <= 9; i++) {
     botao.value = i;
     tela = botao.addEventListener('click', (event) => {
         event.preventDefault();
-        
-        inputNumero.innerHTML = `${i}`;
+
+        inputNumero.innerHTML += `${i}`;
         inputNumero.style.marginLeft = "270px";
         click.push(i);
         
         if(operacao){
-            clickOperacao++;
-            inputNumero.innerHTML = `${clickAnterior} ${operacao} ${event.target.value}`;
+            // console.log(i);
+            let numeroEsquerdo = `${i}`;
+            clickPosterior = [];
+            numeroPosOperacao += numeroEsquerdo;
+            inputNumero.innerHTML = `${clickAnterior} ${operacao} ${numeroPosOperacao}`;
             inputNumero.style.marginLeft = "270px";
-            btnZerar;
         };
+        
     });
-    
+
 };
 
 btnMais.addEventListener('click', () => {
     clickAnterior = Number(click.join(''));
-    console.log(clickAnterior);
+    // console.log(clickAnterior);
     operacao = '+';
     click = [];
     inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
+    `${clickAnterior} ${operacao}`;
     inputNumero.style.marginLeft = '270px';
     btnZerar;
 });
@@ -159,7 +164,9 @@ btnX.addEventListener('click', () => {
     
 });
 
-btnIgual.addEventListener('click', () => {
+let igualdade = btnIgual.addEventListener('click', () => {
+    let teste = cliqueInicio++;
+    console.log(`cliqueInicio: ${teste}`)
     clickPosterior = Number(click.join(''));
     // console.log(clickPosterior)
     let resultado = 0;
@@ -181,7 +188,7 @@ btnIgual.addEventListener('click', () => {
 
         setInterval(()=>{
             painel.innerHTML =''
-        }, 3000) /* Função que apaga em 3 segundos o resultado do painel 
+        }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
         com os valores abaixo da calculadora */
         
         click = [];
@@ -196,6 +203,12 @@ btnIgual.addEventListener('click', () => {
         inputNumero.innerHTML = 
         `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
+
+        setInterval(()=>{
+            painel.innerHTML =''
+        }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
+        com os valores abaixo da calculadora */
+
         click = [];
         clickAnterior = [];
         clickPosterior = [];
@@ -208,10 +221,17 @@ btnIgual.addEventListener('click', () => {
         inputNumero.innerHTML = 
         `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
+
+        setInterval(()=>{
+            painel.innerHTML =''
+        }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
+        com os valores abaixo da calculadora */
+
         click = [];
         clickAnterior = [];
         clickPosterior = [];
         btnZerar;
+
     } else if (operacao === '/') {
         operacao = '/';
         resultado = clickAnterior / clickPosterior;
@@ -219,6 +239,12 @@ btnIgual.addEventListener('click', () => {
         inputNumero.innerHTML = 
             `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
         inputNumero.style.marginLeft = "230px";
+
+        setInterval(()=>{
+            painel.innerHTML =''
+        }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
+        com os valores abaixo da calculadora */
+
         click = [];
         clickAnterior = [];
         clickPosterior = [];
@@ -226,3 +252,7 @@ btnIgual.addEventListener('click', () => {
     }
 
 });
+
+if(cliqueInicio === 2){
+    window.location.reload();
+};

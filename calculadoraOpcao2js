@@ -1,228 +1,85 @@
-const inputNumero =document.getElementById('inputNumero');
-
-const btn7 = document.getElementById('btn7');
-const btn8 = document.getElementById('btn8');
-const btn9 = document.getElementById('btn9');
-const btnX = document.getElementById('btnx');
-
-const btn4 = document.getElementById('btn4');
-const btn5 = document.getElementById('btn5');
-const btn6 = document.getElementById('btn6');
-const btnMenos = document.getElementById('btn-');
-
-const btn1 = document.getElementById('btn1');
-const btn2 = document.getElementById('btn2');
-const btn3 = document.getElementById('btn3');
-const btnMais = document.getElementById('btn+');
-
-const btn0 = document.getElementById('btn0');
-const btnVirgula = document.getElementById('btnvirgula');
-const btnIgual = document.getElementById('btnigual');
-const btnZerar = document.getElementById('btnZerar');
-
+// === Seletores principais ===
+const inputNumero = document.getElementById('inputNumero');
 const painel = document.getElementById('painel');
 
-
-let click = [];
-let clickAnterior = null;
-let clickPosterior = null;
+// === Estado da calculadora ===
+let valorAtual = "";
+let valorAnterior = "";
 let operacao = null;
-let total = [];
-let clickOperacao = 0;
 
-const btnZero = btnZerar.addEventListener('click', () => {
-    inputNumero.textContent = "";
-    click = [];
-    painel.innerHTML = '';
-    inputNumero.innerHTML = '';
-    clickAnterior = [];
-    clickPosterior = [];
-    operacao = '';
-    total = [];
-    clickOperacao = 0;
-});
+// === Funções auxiliares ===
+function atualizarDisplay(conteudo) {
+    inputNumero.innerHTML = conteudo;
+    inputNumero.style.marginLeft = "250px";
+}
 
-const btnMais2 = btnMais.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(" + ").join("");
-});
+function limparTudo() {
+    valorAtual = "";
+    valorAnterior = "";
+    operacao = null;
+    atualizarDisplay("");
+    painel.innerHTML = "";
+}
 
-const btnMenos2 = btnMenos.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(" - ").join("");
-});
-
-const btnMultiplica = btnX.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(" x ").join("");
-});
-
-const btnVirgula2 = btnVirgula.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(",").join("");
-});
-
-const btnIgual2 = btnIgual.addEventListener('click', () => {
-    inputNumero.textContent = click.concat(" = ").join("");
-});
-
-const botoes = {
-            btn0,
-            btn1,
-            btn2,
-            btn3,
-            btn4,
-            btn5,
-            btn6,
-            btn7,
-            btn8,
-            btn9,
-            btnMais: btnMais2, 
-            btnMenos: btnMenos2, 
-            btnX: btnMultiplica, 
-            btnVirgula: btnVirgula2, 
-            btnIgual: btnIgual2,
-            btnZerar: btnZero
-};
-
-let tela;
-
+// === Lógica dos botões numéricos ===
 for (let i = 0; i <= 9; i++) {
-
     const botao = document.getElementById(`btn${i}`);
-    botao.value = i;
-    tela = botao.addEventListener('click', (event) => {
-        event.preventDefault();
-        
-        inputNumero.innerHTML = `${i}`;
-        inputNumero.style.marginLeft = "270px";
-        click.push(i);
-        
-        if(operacao){
-            clickOperacao++;
-            inputNumero.innerHTML = `${clickAnterior} ${operacao} ${event.target.value}`;
-            inputNumero.style.marginLeft = "270px";
-            btnZerar;
-        };
+    botao.addEventListener('click', () => {
+        valorAtual += i;
+        atualizarDisplay(valorAtual);
     });
-    
+}
+
+// === Lógica dos botões de operação ===
+const operacoes = {
+    btnMais: '+',
+    btnMenos: '-',
+    btnx: '*'
 };
 
-btnMais.addEventListener('click', () => {
-    clickAnterior = Number(click.join(''));
-    console.log(clickAnterior);
-    operacao = '+';
-    click = [];
-    inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-    inputNumero.style.marginLeft = '270px';
-    btnZerar;
-});
+for (const [id, simbolo] of Object.entries(operacoes)) {
+    document.getElementById(id).addEventListener('click', () => {
+        if (!valorAtual) return; // evita clicar sem número
+        valorAnterior = valorAtual;
+        valorAtual = "";
+        operacao = simbolo;
+        atualizarDisplay(`${valorAnterior} ${operacao}`);
+    });
+}
 
-btnMenos.addEventListener('click', () => {
-    clickAnterior = Number(click.join(''));
-    console.log(clickAnterior);
-    operacao = '-';
-    click = [];
-    inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-    inputNumero.style.marginLeft = '270px';
-    btnZerar;
-});
-
-let clique = 0;
-
-btnX.addEventListener('click', () => {
-    clique++;
-    if (clique === 1) {
-        clickAnterior = Number(click.join(''));
-        console.log(clickAnterior);
-        
-        operacao = '*';
-        click = [];
-        inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-        inputNumero.style.marginLeft = '300px';
-        btnZerar;
-        
-        // painel.innerHTML = `${clickAnterior} ${operacao}`;
-        
-    } else if (clique === 2) {
-        clickAnterior = Number(click.join(''));
-        console.log(clickAnterior);
-        
-        operacao = '/';
-        click = [];
-        inputNumero.innerHTML =
-        `${clickAnterior} ${operacao}`;
-        inputNumero.style.marginLeft = '300px';
-        btnZerar;
-        
-        // painel.innerHTML = `${clickAnterior} ${operacao}`;
+// === Botão de vírgula ===
+document.getElementById('btnvirgula').addEventListener('click', () => {
+    if (!valorAtual.includes('.')) {
+        valorAtual += '.';
+        atualizarDisplay(valorAtual);
     }
-    
 });
 
-btnIgual.addEventListener('click', () => {
-    clickPosterior = Number(click.join(''));
-    // console.log(clickPosterior)
+// === Botão de igual ===
+document.getElementById('btnigual').addEventListener('click', () => {
+    if (!valorAnterior || !valorAtual || !operacao) return;
+
+    const num1 = parseFloat(valorAnterior);
+    const num2 = parseFloat(valorAtual);
     let resultado = 0;
-    
-    inputNumero.innerHTML =
-    `${clickAnterior} ${operacao} ${clickPosterior}`;
-    inputNumero.style.marginLeft = '300px';
 
-    // painel.innerHTML = `${clickAnterior} ${operacao} ${clickPosterior}`;
-    
-    if (operacao === '+'){
-        
-        resultado = clickAnterior + clickPosterior;
-        inputNumero.innerHTML = 
-        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "230px";
-        
-        painel.innerHTML = `${resultado}`;
-
-        setInterval(()=>{
-            painel.innerHTML =''
-        }, 3000) /* Função que apaga em 3 segundos o resultado do painel 
-        com os valores abaixo da calculadora */
-        
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-        console.log(resultado);
-        btnZerar;
-
-    } else if (operacao === '-'){
-        
-        resultado = clickAnterior - clickPosterior;
-        inputNumero.innerHTML = 
-        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "230px";
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-        btnZerar;
-        
-    } else if (operacao === '*'){
-        
-        operacao = '*';
-        resultado = clickAnterior * clickPosterior;
-        inputNumero.innerHTML = 
-        `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "230px";
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-        btnZerar;
-    } else if (operacao === '/') {
-        operacao = '/';
-        resultado = clickAnterior / clickPosterior;
-        console.log(resultado);
-        inputNumero.innerHTML = 
-            `${clickAnterior} ${operacao} ${clickPosterior} = ${resultado}`;
-        inputNumero.style.marginLeft = "230px";
-        click = [];
-        clickAnterior = [];
-        clickPosterior = [];
-        btnZerar;
+    switch (operacao) {
+        case '+': resultado = num1 + num2; break;
+        case '-': resultado = num1 - num2; break;
+        case '*': resultado = num1 * num2; break;
+        case '/': resultado = num2 !== 0 ? num1 / num2 : 'Erro'; break;
     }
 
+    atualizarDisplay(`${num1} ${operacao} ${num2} = ${resultado}`);
+    painel.innerHTML = resultado;
+
+    // limpa após 3 segundos
+    setTimeout(() => painel.innerHTML = '', 3000);
+
+    valorAnterior = "";
+    valorAtual = "";
+    operacao = null;
 });
+
+// === Botão de zerar ===
+document.getElementById('btnZerar').addEventListener('click', limparTudo);

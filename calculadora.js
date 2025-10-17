@@ -21,6 +21,7 @@ const btnIgual = document.getElementById('btnigual');
 const btnZerar = document.getElementById('btnZerar');
 
 const painel = document.getElementById('painel');
+const calculadora = document.getElementById('calculadora');
 
 
 let click = [];
@@ -178,14 +179,16 @@ let igualdade = btnIgual.addEventListener('click', () => {
         inputNumero.style.marginLeft = "230px";
         
         painel.innerHTML = `${resultado}`;
-        console.log(`No click: ${click}`);
-        console.log(`No clickAnterior: ${clickAnterior}`);
-        console.log(`No clickPosterior: ${clickPosterior}`);
+        // console.log(`No click: ${click}`);
+        // console.log(`No clickAnterior: ${clickAnterior}`);
+        // console.log(`No clickPosterior: ${clickPosterior}`);
         
+        // inputNumero.disable = true;
         setInterval(()=>{
             painel.innerHTML =''
         }, 5000) /* Função que apaga em 3 segundos o resultado do painel 
         com os valores abaixo da calculadora */
+
         
     } else if (operacao === '-'){
         
